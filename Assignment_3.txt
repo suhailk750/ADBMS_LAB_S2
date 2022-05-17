@@ -1,0 +1,37 @@
+-- 
+-- Roll No: <56>
+-- Name: <SUHAIL K>
+-- Program: <Assignment 3>
+-- 
+
+--
+-- Dumping data for table <Teaaches>
+--
+
+insert into Teaches values(101,"BM",'2021-12-01','2022-03-01');
+insert into Teaches values(102,"ADBMS",'2021-12-01','2022-03-01');
+insert into Teaches values(103,"AOS",'2021-12-01','2022-03-01');
+insert into Teaches values(104,"MATHS",'2021-12-01','2022-03-01');
+insert into Teaches values(105,"ACN",'2021-12-01','2022-02.12');
+--
+
+-- SQl Query Statements
+--
+
+-- -----SQL query statments preceeded by the its question-------- # This line may be removed in the actual file
+
+-- -----Question2---------------
+
+update subject set duration=4;
+
+-- -----Question3---------------
+
+select * from faculty where doj >='2020-03-10';
+
+-- -----Question4---------------
+
+select * from subject where sdate>='2020-04-01' and edate<='2020-04-30';
+
+-- -----Question5---------------
+
+select faculty.fname,subject.sname,subject.duration from faculty,subject where faculty.fno=subject.fno and subject.duration;

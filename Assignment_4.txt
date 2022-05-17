@@ -1,0 +1,161 @@
+-- 
+-- Roll No: <56>
+-- Name: <Suhail K>
+-- Program: <Assignment 4>
+-- 
+
+
+--
+-- Table structure for table <customer>
+--
+
+create table customer (license_no int, name varchar(15)not null, address varchar(20) not null, age int not null , phone varchar(12) not null, primary key (license_no));
+
+
+--
+-- Table structure for table <vehicle>
+--
+
+create table vehicle(reg_no varchar(10), make varchar(15) not null ,model varchar(10), yom int(4) not null, cc int not null,sc int not null,  primary key (reg_no));
+
+--
+-- Table structure for table <owns>
+--
+
+create table owns(license_no int ,reg_no varchar(10),primary key (reg_no), foreign key (license_no) references customer(license_no), foreign key(reg_no) references vehicle(reg_no) );
+
+--
+-- Table structure for table <policy>
+--
+
+create table policy (policy_no int , reg_no varchar(10), license_no int , issue_date date not null ,value int not null ,policy_amt int not null , mode varchar(15) not null , foreign key (license_no) references customer(license_no), foreign key(reg_no) references vehicle(reg_no), primary key (policy_no));
+
+--
+-- Table structure for table <accident>
+--
+
+create table accident (claim_no int, location varchar(15) not null, doa date not null, primary key (claim_no));
+
+--
+-- Table structure for table <participated>
+--
+
+create table participated (license_no int,reg_no varchar(10), claim_no int , amt int , foreign key (license_no) references customer (license_no), foreign key (reg_no) references vehicle (reg_no) ,  foreign key (claim_no) references accident (claim_no), primary key (claim_no));
+
+--
+-- Dumping data for table <customer>
+--
+
+insert into customer values(100,'John','malappuram',30,'9747875421');
+insert into customer values(101,'Rahul','delhi',21,'9747881122');
+insert into customer values(102,'Jeorge','mumbai',20,'9747881122');
+insert into customer values(103,'ibrahim','kasargod',65,'8187551122');
+insert into customer values(104,'Roy','nadapuram',45,'9747551100');
+insert into customer values(105,'Abel','malappuram',46,'9747651100');
+
+--
+-- Dumping data for table <vehicle>
+--
+
+insert into vehicle values('KL65C6887','maruti','Alto',2014,800,4);
+insert into vehicle values('KL55B7878','maruti','Ertiga',2015,1500,7);
+insert into vehicle values('KL53J7558','BMW','s6',2012,2500,4);
+insert into vehicle values('KL10AV9058','mini cooper','Club man',2020,3500,2);
+insert into vehicle values('KL10AZ4058','Toyoto','Innova',2020,3500,7);
+insert into vehicle values('KL65M4558','kia','seltos',2020,2500,4);
+insert into vehicle values('KL10AS0103','maruti','Alto',2020,2000,5);
+
+--
+-- Dumping data for table <owns>
+--
+
+insert into owns values (100,'KL65C6887');
+insert into owns values (100,'KL10AZ4058');
+insert into owns values (102,'KL65M4558');
+insert into owns values (103,'KL10AV9058');
+insert into owns values (101,'KL53J7558');
+insert into owns values (104,'KL55B7878');
+insert into owns values (105,'KL10AS0103');
+
+
+--
+-- Dumping data for table <policy>
+--
+
+insert into policy values (1,'KL10AZ4058',100,'2016-01-01',15000,10000,'cheque');
+insert into policy values (2,'KL65C6887',100,'2017-01-01',16000,9000,'cheque');
+insert into policy values (3,'KL53J7558',101,'2012-10-01',16000,9000,'cash');
+insert into policy values (4,'KL65M4558',102,'2009-12-01',9000,5000,'UPI');
+insert into policy values (5,'KL10AV9058',103,'2015-11-11',19000,15000,'UPI');
+insert into policy values (6,'KL55B7878',104,'2015-11-11',18000,15000,'UPI');
+
+--
+-- Dumping data for table <accident>
+--
+
+insert into accident values (1,'vengara','2016-10-10');
+insert into accident values (2,'Kuttipuram','2017-10-10');
+insert into accident values (3,'Kunamkulam','2022-03-01');
+insert into accident values (4,'Kolappuram','2020-03-01');
+insert into accident values (5,'Chelari','2020-04-01');
+
+--
+-- Dumping data for table <participated>
+--
+
+insert into participated values (100,'KL10AZ4058',1,1000);
+insert into participated values (100,'KL65C6887',2,1000);
+insert into participated values (101,'KL53J7558',3,2000);
+insert into participated values (102,'KL65M4558',4,2000);
+insert into participated values (103,'KL10AV9058',5,3000);
+
+--
+-- SQl Query Statements
+--
+
+-- -----Question3.1---------------
+
+select customer.name, policy.policy_no from customer,policy where customer.license_no = policy.license_no AND policy.issue_date > '2014-01-01';
+
+
+-- -----Question3.2---------------
+
+select C.name ,P.reg_no,P.license_no from customer as C ,policy as P where C.license_no = P.license_no and mode = 'cheque';
+
+
+-- -----Question3.3---------------
+
+select name,license_no from customer natural join (vehicle natural join policy) where make ='maruti';
+
+
+-- -----Question3.4---------------
+
+select name from customer natural join ( accident natural join (participated natural join policy)) where datediff(doa,issue_date)<365;
+
+
+-- -----Question3.5---------------
+
+select name ,count(license_no)from participated natural join customer group by license_no having name='John';
+
+-- -----Question3.6---------------
+
+delete from owns where reg_no in (select reg_no from vehicle where model ='Alto')and license_no=(select license_no from customer where name='Abel');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

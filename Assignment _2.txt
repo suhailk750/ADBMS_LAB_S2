@@ -1,0 +1,52 @@
+-- 
+-- Roll No: <56>
+-- Name: <SUHAIL K>
+-- Program: <Assignment 2>
+-- 
+
+
+--
+-- Table structure for table <Teaches>
+--
+create table Teaches(fno char(5) NOT NULL,sname varchar(15) NOT NULL,sdate date NOT NULL,edate date NOT NULL,primary key(fno, sname),foreign key(fno) references faculty(fno),foreign key(sname) references subject(sname));
+
+--
+-- Dumping data for table <faculty>
+--
+
+insert into faculty values("101","shabeeb","2022-02-22","IT");
+insert into faculty values("102","shabeer","2022-03-20","Sociology");
+insert into faculty values("103","nihal","2022-03-25","psychology");
+insert into faculty values("104","arif","2022-04-10","Electronics");
+insert into faculty values("105","shakkir","2022-04-20","Business");
+
+--
+-- Dumping data for table <subject>
+--
+insert into subject values("BM",'2022-10-10','2022-12-15',110,"100");
+insert into subject values("ADBMS",'2022-10-14','2022-12-20',111,"104");
+insert into subject values("AOS",'2022-10-13','2022-12-17',112,"103");
+insert into subject values("MATHS",'2022-10-15','2022-12-15',113,"102");
+insert into subject values("ACN",'2022-10-13','2022-12-15',114,"101");
+
+--
+-- SQl Query Statements
+--
+
+-- -----SQL query statments preceeded by the its question-------- # This line may be removed in the actual file
+
+-- -----Question2---------------
+
+ALTER table subject ADD(Duration numeric); 
+
+-- -----Question3---------------
+
+ALTER table faculty MODIFY specialization varchar(20);
+
+-- -----Question4---------------
+
+ALTER table subject DROP sdate;
+ALTER table subject DROP edate;
+
+
+
