@@ -1,0 +1,51 @@
+-- 
+-- Roll No: <56>
+-- Name: <SUHAIL K>
+-- Program: <MongoDB Operations>
+-- 
+
+
+--
+-- Collection structure for collection <order>
+--
+
+
+
+db.createCollection("order")
+
+
+
+
+--
+-- Dumping data for collection <order>
+--
+
+
+
+
+
+db.order.insert({order_no:"O1",year:2020,paid:"Y",cost:{price:30,currency:"INR"},items:{pno:"P1",colors:["blue","black"],quantity:15},delivery_days:5})
+
+
+db.order.insert({order_no:"O2",year:2020,paid:"Y",cost:{price:13,currency:"DLR"},items:[{pno:"P2",colors:"white",quantity:4},{pno:"P3",colors:["white","black"],quantity:1}],delivery_days:4})
+
+
+db.order.insert({order_no:"O3",year:2018,paid:"N",cost:{price:33,currency:"EUR"},items:{pno:"P3",colors:["blue","black"],quantity:4},delivery_days:4})
+
+db.order.insert({order_no:"O4",year:2017,paid:"Y",cost:{price:17,currency:"INR"},items:[{pno:"P2",colors:["pink","black"],quantity:14},{pno:"P4",colors:"white",quantity:1}],delivery_days:2})
+
+
+db.order.insert({order_no:"O5",year:2020,paid:"Y",cost:{price:19,currency:"INR"},items:{pno:"P1",quantity:15},delivery_days:3})
+
+
+
+
+
+--
+-- mongodb Query Statements
+--
+
+db.order.find({paid:"Y"}).pretty()
+
+
+
